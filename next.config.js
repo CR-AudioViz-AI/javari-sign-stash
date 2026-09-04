@@ -5,13 +5,6 @@
 // unavailable for the edge compilation is what stops it. The import must stay
 // a BARE `crypto` specifier: webpack rejects the `node:` scheme before
 // resolve.fallback is ever consulted, so `node:crypto` fails here too.
-const _edgeCryptoOff = (config, { nextRuntime }) => {
-  if (nextRuntime === "edge") {
-    config.resolve = config.resolve || {};
-    config.resolve.fallback = { ...(config.resolve.fallback || {}), crypto: false };
-  }
-  return config;
-};
 
 const _baseConfig = { reactStrictMode: true };
-module.exports = { ..._baseConfig, webpack: _edgeCryptoOff };
+module.exports = { ..._baseConfig };
